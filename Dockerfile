@@ -1,12 +1,18 @@
 FROM node:22-alpine AS build
 WORKDIR /app
 
-COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile
+# WICHTIG: package-lock.json statt yarn.lock kopieren
+COPY package.json package-lock.json ./
+
+# npm ci ist das npm-Äquivalent zu "frozen-lockfile" (sicherer & schneller)
+RUN npm ci
 
 COPY . .
-RUN yarn build
 
+# Build starten
+RUN npm run build
+
+# --- Ab hier bleibt alles exakt gleich wie vorher ---
 FROM nginx:1.27-alpine AS runtime
 RUN rm -rf /usr/share/nginx/html/*
 
