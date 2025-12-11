@@ -27,7 +27,7 @@ function App() {
         </p>
       </div>
       <p className="read-the-docs">
-        Welcome to my site on the world wide web. prudi ist unglaublich toll
+        Welcome to my site on the world wide web. prudi ist unglaublich super toll
       </p>
         <Test id={2}/>
     </>
